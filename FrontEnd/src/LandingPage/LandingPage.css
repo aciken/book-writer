@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
+
+.LandingPage{
+    font-family: 'Gabarito';
+    height: 200vh;
+    background-color: #dbeafe;
+    margin: 0;
+    padding: 0;
+}
+
+.LandingPage h1{
+    color: #1f2937;
+    font-weight: 900;
+    font-size: 72px;
+}
+
+.img-one{
+width: 300px;
+height: auto;
+}

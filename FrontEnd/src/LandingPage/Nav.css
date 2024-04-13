@@ -1,0 +1,48 @@
+
+
+.nav{
+    display: flex;
+    justify-content: center;
+    padding: 4px;
+    color: white;
+}
+
+.nav-layout{
+    background-color: #3b82f6;
+    border-radius: 8px;
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.nav-layout .nav-links{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+}
+
+.nav-layout .nav-links a{
+    color: white;
+    text-decoration: none;
+}
+
+.sign-up-btn{
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.nav-links a.sign-up-btn{
+    background-color: #bfdbfe;
+    color: #2563eb;
+    transition: .2s ease-in-out;
+}
+
+.nav-links a.sign-up-btn:hover{
+    background-color: #93c5fd;
+    color: #1d4ed8;
+}
+
