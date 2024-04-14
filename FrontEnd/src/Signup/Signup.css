@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
+.Signup{
+    height: 100vh;
+    background-color: #dbeafe;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Gabarito';
+    color: #1f2937;
+}
+
+.Signup form h1{
+    font-weight: 400;
+    color: #374151;
+}
+
+.Signup form {
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    padding: 16px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Signup form label{
+    color: #4b5563;
+}
+
+.Signup form .input-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    align-items: center;
+
+}
+
+.Signup form .input-wrapper div{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.Signup form input{
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 4px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+    
+}
+
+.Signup form button{
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    transition: .1s ease-in-out;
+    width: 80%;
+    font-size: 16px;
+}
+
+.Signup form button:hover{
+    background-color: #3b82f6;
+    color: #ffffff;
+}
+
+.error-message{
+    color: #f87171;
+}
+
+
+
+.Signup form.verify-box{
+    gap: 24px;
+height: 280px;
+width: 500px;
+padding: 24px;
+justify-content: center;
+
+
+}
+
+.Signup form.verify-box div{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.Signup form.verify-box div input{
+    width: 100%;
+}
+
+.Signup form.verify-box button{
+    width: 50%;
+}
