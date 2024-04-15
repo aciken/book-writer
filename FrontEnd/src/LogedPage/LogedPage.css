@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
+.LogedPage{
+    height: 100vh;
+    background-color: #eff6ff;
+    font-family: 'Gabarito';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-first{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    height: 90%;
+    color: #1f2937;
+    width: 50%;
+
+    position: relative;
+}
+
+.create-first h1{
+    font-size: 48px;
+    font-weight: 700;
+    z-index: 2;
+}
+
+.create-first p{
+    font-size: 24px;
+    font-weight: 400;
+    z-index: 2;
+}
+
+.create-first button{
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    z-index: 2;
+}
+
+.create-first button:hover{
+    background-color: #1d4ed8;
+}
+
+.step-form{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    gap: 16px;
+
+}
+
+.step-form img{
+    width: 250px;
+    height: 300px;
+}
+
+.form-container{
+    display: flex;
+    height: 90%;
+    color: #1f2937;
+    width: 70%;
+    position: relative;
+}
+
+.step-container{
+    background-color: white;
+    border-radius: 5px;
+    width: 100%;
+    height: 90%;
+    margin-top: 16px ;
+}
+

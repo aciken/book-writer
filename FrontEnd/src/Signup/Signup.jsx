@@ -1,10 +1,15 @@
 import './Signup.css';
-import { Form, Link } from 'react-router-dom';
+import { Form, Link,useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 
 
+
+
+
 export function Signup() {
+
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -50,7 +55,7 @@ export function Signup() {
         .then(res => {
             console.log(res.data);
             if(res.data.message === 'verified'){
-                window.location.href = '/logedPage';
+                navigate('/logedPage', {state: {email: email}})
             } else{
                 setVerifyError('Invalid verification code');
             }
@@ -61,6 +66,7 @@ export function Signup() {
 
     return (
         <div className="Signup">
+            <Link className='logo-log' to="/">Logo</Link>
             {verification ?             
             <form className='verify-box' onSubmit={Verify}>
                 <h1>Verify your email</h1>
@@ -89,7 +95,7 @@ export function Signup() {
                 </div>
                 <p className='error-message'>{errorMessage}</p>
                 <button type='submit'>Signup</button>
-                <p>Already have account?<Link to="/login">Login</Link></p>
+                <p>Already have account?<Link to="/login" className='have-acc'>Login</Link></p>
             </form>
 }
         </div>
