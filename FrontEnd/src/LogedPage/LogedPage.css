@@ -66,17 +66,38 @@
 
 .form-container{
     display: flex;
-    height: 90%;
+    height: 100%;
     color: #1f2937;
     width: 70%;
-    position: relative;
+    position: relative; 
 }
 
 .step-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     background-color: white;
     border-radius: 5px;
     width: 100%;
     height: 90%;
     margin-top: 16px ;
+}
+
+.step-flex{
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.step-container button{
+    width: 56px;
+}
+
+.plan-card{
+    height: 300px;
+    width: 25%;
+    background-color: #dbeafe;
+    border-radius: 15px;
 }
 

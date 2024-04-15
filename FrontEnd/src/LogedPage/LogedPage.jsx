@@ -38,26 +38,26 @@ export function LogedPage() {
                 <div className='step-form'>
                     <img className='process' src={step1} alt=""/>
                     <div className='step-container'>
-                        <h1>Chose Book Plan</h1>
-                        {/* make 3 plan cards for a book maker with prices */}
-                        <div className='plan-card'>
-                            <h2>Basic</h2>
-                            <p>Get the fully written book in only a few minutes, with no effort.</p>
-                            <button className='create-btn' onClick={() => setFormPhase(2)}>Select</button>
+                    <h1>Chose a Book Plan</h1>
+                        <div className='step-flex'>
+                            <div className='plan-card'>
+                                <h2>Basic</h2>
+                                <p>Get the fully written book in only a few minutes, with no effort.</p>
+                            </div>
+                            <div className='plan-card'>
+                                <h2>Premium</h2>
+                                <p>Get the fully written book in only a few minutes, with no effort.</p>
+
+                            </div>
+                            <div className='plan-card'>
+                                <h2>Dostoevsky</h2>
+                                <p>Get the fully written book in only a few minutes, with no effort.</p>
+                            </div>
                         </div>
-                        <div className='plan-card'>
-                            <h2>Premium</h2>
-                            <p>Get the fully written book in only a few minutes, with no effort.</p>
-                            <button className='create-btn' onClick={() => setFormPhase(2)}>Select</button>
-                        </div>
-                        <div className='plan-card'>
-                            <h2>Dostoevsky</h2>
-                            <p>Get the fully written book in only a few minutes, with no effort.</p>
-                            <button className='create-btn' onClick={() => setFormPhase(2)}>Select</button>
-                        </div>
+                        <button className='create-btn' onClick={openForm}>Next</button>
                     </div>
 
-                        <button className='create-btn' onClick={openForm}>Next</button>
+
                     </div>
            
                 : formPhase == 2 ?
