@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import './LogedPage.css';
 import { LogedNav } from './LogedNav';
 import { useState } from 'react';
@@ -9,9 +9,13 @@ export function LogedPage() {
 
 
     const location = useLocation();
+    const navigate = useNavigate();
 
     const [formOpen, setFormOpen] = useState(false);
     const [formPhase, setFormPhase] = useState(1);
+
+
+
 
 
 
@@ -39,21 +43,7 @@ export function LogedPage() {
                     <img className='process' src={step1} alt=""/>
                     <div className='step-container'>
                     <h1>Chose a Book Plan</h1>
-                        <div className='step-flex'>
-                            <div className='plan-card'>
-                                <h2>Basic</h2>
-                                <p>Get the fully written book in only a few minutes, with no effort.</p>
-                            </div>
-                            <div className='plan-card'>
-                                <h2>Premium</h2>
-                                <p>Get the fully written book in only a few minutes, with no effort.</p>
-
-                            </div>
-                            <div className='plan-card'>
-                                <h2>Dostoevsky</h2>
-                                <p>Get the fully written book in only a few minutes, with no effort.</p>
-                            </div>
-                        </div>
+                
                         <button className='create-btn' onClick={openForm}>Next</button>
                     </div>
 
@@ -78,7 +68,7 @@ export function LogedPage() {
         <div className='create-first'>
             <h1>Create your first e-book</h1>
             <p>Get the fully written book in only a few minutes, with no effort.</p>
-            <button className='create-btn' onClick={openForm}>Create E-Book</button>
+            <button className='create-btn' onClick={() => navigate('/logedPage/step1') }>Create E-Book</button>
         </div>
     }
 </div>
