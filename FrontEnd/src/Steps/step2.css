@@ -80,7 +80,7 @@ border-radius: 50%;
     gap: 4px;
 }
 
-.create-book .top-inputs .input-part div input{
+.create-book .top-inputs .input-part div input[type="text"]{
     padding: 6px 12px;
     font-size: 16px;
     font-weight: 400;
@@ -150,5 +150,19 @@ border-radius: 50%;
   .create-book .top-inputs .input-part div input.page-slider:focus{
     border:none;
     outline: none;
+  }
+
+  .create-book .top-inputs .input-part div.radio-btns{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .create-book .top-inputs .input-part div.radio-btns div{
+    display: flex;
+    flex-direction:row ;
+    gap: 8px;
+    align-items: center;
   }
 

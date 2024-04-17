@@ -76,8 +76,19 @@ export function Step2(){
                                     <p>{page}</p>
                                 </div>
                                 <div>
-                                    <label htmlFor="book-font">Cover</label>
-                                    
+                                    {/* 2 radio buttons for ai cover or not */}
+                                    <div className='radio-btns'>
+                                        <div>
+                                        <label htmlFor="ai">AI Cover</label>
+                                            <input type="radio" name='cover' value='ai' required/>
+                                        </div>
+                                        <div>
+                                        <label htmlFor="custom">Custom Cover</label>
+                                            <input type="radio" name='cover' value='custom' required/>
+                                        </div>
+                                    </div>
+                        
+
                                     <input type="text" name='book-font' required/>
                                 </div>
                                 <div>
