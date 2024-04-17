@@ -12,10 +12,20 @@ export function Step1() {
     const [book1, setBook1] = useState('plan-card');
     const [book2, setBook2] = useState('plan-card');
     const [book3, setBook3] = useState('plan-card');
+    const [btnClass, setBtnClass] = useState('next-btn')
 
-    const nextStep = () => {
+    const nextStep = (e) => {
+        e.preventDefault()
         if(book1 == 'plan-card selected' || book2 == 'plan-card selected' || book3 == 'plan-card selected'){
-            navigate('/logedPage/step2');
+            let plan;
+            if(book1 == 'plan-card selected'){
+                plan = 'Basic';
+            } else if(book2 == 'plan-card selected'){
+                plan = 'Premium';
+            } else{
+                plan = 'Dostoevsky';
+            }
+            navigate('/logedPage/step2', {state: {plan: plan}});
         }
     }
 
@@ -28,7 +38,7 @@ export function Step1() {
                     <div className='step-container'>
                     <h1>Chose a Book Plan</h1>
                     <div className='step-flex'>
-                            <div className={book1} onClick={() => {setBook1('plan-card selected'); setBook2('plan-card'); setBook3('plan-card')}}>
+                            <div className={book1} onClick={() => {setBook1('plan-card selected'); setBook2('plan-card'); setBook3('plan-card'); setBtnClass('next-btn able')}}>
                                 <h2>Basic</h2>
                                 <h2 className='plan-price'><span>$</span>19</h2>
                                 <div className='info'>
@@ -45,7 +55,7 @@ export function Step1() {
                                 </div>
 
                             </div>
-                            <div className={book2} onClick={() => {setBook1('plan-card'); setBook2('plan-card selected'); setBook3('plan-card')}}>
+                            <div className={book2} onClick={() => {setBook1('plan-card'); setBook2('plan-card selected'); setBook3('plan-card'); setBtnClass('next-btn able')}}>
                                 <h2>Premium</h2>
                                 <h2 className='plan-price'><span>$</span>29</h2>
                                 <div className='info'>
@@ -62,7 +72,7 @@ export function Step1() {
                                 </div>
 
                             </div>
-                            <div className={book3} onClick={() => {setBook1('plan-card'); setBook2('plan-card'); setBook3('plan-card selected')}}>
+                            <div className={book3} onClick={() => {setBook1('plan-card'); setBook2('plan-card'); setBook3('plan-card selected'); setBtnClass('next-btn able')}}>
                                 <h2>Dostoevsky</h2>
                                 <h2 className='plan-price'><span>$</span>49</h2>
                                 <div className='info'>
@@ -79,7 +89,7 @@ export function Step1() {
                                 </div>
                             </div>
                         </div>
-                        <button className='next-btn' onClick={() => nextStep()}>Next</button>
+                        <a href="#" className={btnClass} onClick={(e) => nextStep(e)}>Next</a>
                     </div>
                     </div>
                     </div>

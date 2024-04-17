@@ -1,0 +1,154 @@
+.step2{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    height: auto;
+    min-height: 100vh;
+    background-color: #eff6ff;
+    font-family: 'Gabarito';
+}
+
+.back-arrow{
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 36px;
+    height: 36px;
+    fill: #374151;
+    transition: .2s ease-in-out;
+}
+
+.back-arrow:hover{
+background-color: #bfdbfe;
+border-radius: 50%;
+}
+
+.step2-headline{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 36px;
+    width: 80%;
+    border-bottom: 1px solid #d1d5db;
+}
+
+.create-book{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: start;
+    height: 100%;
+    width: 100%;
+}
+
+.create-book .top-inputs{
+
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    width: 80%;
+    padding: 16px 0 0 0;
+}
+
+.create-book .top-inputs.n-first{
+    border-top: 1px solid #d1d5db;
+    margin-top: 16px;
+}
+
+.create-book .top-inputs .text-part{
+    color: #475569;
+    width: 30%;
+}
+
+.create-book .top-inputs .text-part p{
+    color: #6b7280;
+}
+
+
+.create-book .top-inputs .input-part{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 40%;
+
+}
+
+.create-book .top-inputs .input-part div{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.create-book .top-inputs .input-part div input{
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.create-book .top-inputs .input-part div input:focus{
+    border-color: #2563eb;
+    outline: none;
+}
+
+.create-book .top-inputs .input-part div textarea{
+    resize: none;
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 4px;
+    width: 100%;
+    height: 300px;
+}
+
+.create-book .top-inputs .input-part div input.page-slider{
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;  
+    background: #dbeafe;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+
+}
+
+.create-book .top-inputs .input-part div input.page-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: #172554;
+    cursor: pointer;
+  }
+
+
+  .create-book .top-inputs .input-part div input.page-slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #172554;
+    cursor: pointer;
+  }
+
+  .create-book .top-inputs .input-part div input.page-slider:focus{
+    border:none;
+    outline: none;
+  }
+
