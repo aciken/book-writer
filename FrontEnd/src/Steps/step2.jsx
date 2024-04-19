@@ -22,6 +22,12 @@ export function Step2(){
     const [showAdvanced, setShowAdvanced] = useState(false);
 
     const [chapterNum, setChapterNum] = useState(5);
+    const [chapterDescriptions, setChapterDescriptions] = useState(Array(chapterNum).fill(''));
+const [chapterLengths, setChapterLengths] = useState(Array(chapterNum).fill(''));
+
+
+    const [tempChapterNum, setTempChapterNum] = useState(chapterNum);
+    const [clickedChapter, setClickedChapter] = useState(null);
 
 
 
@@ -170,36 +176,60 @@ export function Step2(){
         </div>
         {showAdvanced ?
             <div>
-    <label htmlFor="chapters">Chapters</label>
-    <input type="number" name='chapters' value={chapterNum} step="1" onChange={(e) => {
-        const newChapterNum = e.target.value;
-        setChapterNum(newChapterNum);
-        if (newChapterNum > chapterNames.length) {
-            setChapterNames(oldChapterNames => [...oldChapterNames, ...new Array(newChapterNum - oldChapterNames.length).fill('')]);
-        } else {
-            setChapterNames(oldChapterNames => oldChapterNames.slice(0, newChapterNum));
-        }
-    }} />
+<label htmlFor="chapters">Chapters</label>
+<input type="number" name='chapters' className='chapter-num' value={tempChapterNum} step="1" onChange={(e) => {
+    setTempChapterNum(e.target.value);
+}} onBlur={(e) => {
+    const newChapterNum = e.target.value;
+    setChapterNum(newChapterNum);
+    if (newChapterNum > chapterNames.length) {
+        setChapterNames(oldChapterNames => [...oldChapterNames, ...new Array(newChapterNum - oldChapterNames.length).fill('')]);
+    } else {
+        setChapterNames(oldChapterNames => oldChapterNames.slice(0, newChapterNum));
+    }
+}} />
 
-    {(() => {
-        const elements = [];
-        for (let i = 0; i < chapterNum; i++) {
-            elements.push(
-                <div key={i} className='chapter-show'>
-                    <p>Chapter {i}</p>
-                    <div className="under-chapter">
-                        <label htmlFor={`chapter-${i+1}`}>Chapter {i+1}</label>
-                        <input type="text" name={`chapter-${i+1}`} value={chapterNames[i] || ''} onChange={(e) => {
-                            const newChapterNames = [...chapterNames];
-                            newChapterNames[i] = e.target.value;
-                            setChapterNames(newChapterNames);
-                        }} />
-                    </div>
-                </div>
-            );
-        }
-        return elements;
-    })()}
+{(() => {
+    const elements = [];
+    for (let i = 0; i < chapterNum; i++) {
+        elements.push(
+
+
+            <div key={i} className='chapter-show' onClick={() => setClickedChapter(clickedChapter === i ? null : i)}>
+                {clickedChapter === i ?
+                <svg className='arrow-up' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>chevron-up</title><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" /></svg>
+                 : 
+                 <svg className='arrow-down' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>chevron-down</title><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg> 
+                }
+            <p>Chapter {i}</p>
+            <div className={`under-chapter ${clickedChapter === i ? 'clicked' : ''}`}>
+                <label htmlFor={`chapter-${i+1}`}>Chapter Name</label>
+                <input type="text" className='chapter-name' name={`chapter-${i+1}`} value={chapterNames[i] || ''}  onClick={(e) => e.stopPropagation()} onChange={(e) => {
+                    const newChapterNames = [...chapterNames];
+                    newChapterNames[i] = e.target.value;
+                    setChapterNames(newChapterNames);
+                }} />
+        
+                <label htmlFor={`description-${i+1}`}>Chapter Description</label>
+                <textarea className='chapter-description' name={`description-${i+1}`} value={chapterDescriptions[i] || ''}  onClick={(e) => e.stopPropagation()} onChange={(e) => {
+                    const newChapterDescriptions = [...chapterDescriptions];
+                    newChapterDescriptions[i] = e.target.value;
+                    setChapterDescriptions(newChapterDescriptions);
+                }} />
+        
+                <label htmlFor={`length-${i+1}`}>Chapter Length</label>
+                <input type="range" className='page-slider' name={`length-${i+1}`} value={chapterLengths[i] || 0} min={1} max={page - chapterLengths.filter((_, index) => index !== i).reduce((a, b) => a + b, 0)} onClick={(e) => e.stopPropagation()} onChange={(e) => {
+                    const newChapterLengths = [...chapterLengths];
+                    newChapterLengths[i] = parseInt(e.target.value, 10);
+                    setChapterLengths(newChapterLengths);
+                }} />
+                <p>{chapterLengths[i] || 0}</p>
+            </div>
+        </div>
+        );
+    }
+    return elements;
+})()}
 </div>
         : null}
     </div>

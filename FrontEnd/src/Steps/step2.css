@@ -199,29 +199,72 @@ border-radius: 50%;
     flex-direction:row ;
     gap: 8px;
     align-items: center;
+
   }
 
 .create-book .top-inputs .input-part .chapter-show{
+    position: relative;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 16px;
-    width: 80%;
+    width: 100%;
     padding: 16px 0 16px 0;
     border-radius: 5px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     transition: .2s ease-in-out;
 }
 
+.create-book .top-inputs .input-part div .chapter-num{
+    margin-bottom: 8px;
+}
+
 .create-book .top-inputs .input-part .chapter-show:hover{
-    background-color: #f0f4ff;
+    background-color: #eff6ff;
 
 }
 
 .create-book .top-inputs .input-part .chapter-show .under-chapter{
     display: none;
 }
+
+.create-book .top-inputs .input-part .chapter-show .under-chapter.clicked{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-book .top-inputs .input-part .chapter-show .under-chapter.clicked input{
+    display: flex;
+    width: 90%;
+}
+
+.create-book .top-inputs .input-part .chapter-show .under-chapter.clicked textarea.chapter-description{
+    display: flex;
+    width: 90%;
+    height: 150px;
+
+}
+
+.create-book .top-inputs .input-part .chapter-show svg{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+    fill: #64748b;
+}
+
+
+
+
+
+
+
+
+
 
 
 
