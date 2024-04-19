@@ -9,6 +9,7 @@ app.use(cors());
 const User = require('./Database/database');
 const {signup, login} = require('./Access/Access');
 const verify = require('./Verify/verify');
+const purchaseBook = require('./Purchase/PurchaseBook');
 
 
 app.get('/', (req, res) => {
@@ -18,6 +19,7 @@ app.get('/', (req, res) => {
 app.put('/signup', signup);
 app.post('/login', login);
 app.put('/verify', verify);
+app.post('/purchaseBook', purchaseBook);
 
 
 app.listen(port, () => {

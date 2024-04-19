@@ -3,16 +3,19 @@ import step1 from '../assets/step1.png'
 import './step1.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 
 export function Step1() {
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [book1, setBook1] = useState('plan-card');
     const [book2, setBook2] = useState('plan-card');
     const [book3, setBook3] = useState('plan-card');
     const [btnClass, setBtnClass] = useState('next-btn')
+    const email = location.state.email;
 
     const nextStep = (e) => {
         e.preventDefault()
@@ -25,7 +28,7 @@ export function Step1() {
             } else{
                 plan = 'Dostoevsky';
             }
-            navigate('/logedPage/step2', {state: {plan: plan}});
+            navigate('/logedPage/step2', {state: {plan: plan,email: email }});
         }
     }
 
@@ -43,8 +46,9 @@ export function Step1() {
                                 <h2 className='plan-price'><span>$</span>19</h2>
                                 <div className='info'>
                                     <p>100 pages</p>
-                                    <p>low qualiity AI images</p>
-                                    <p>no editing</p>
+                                    <p>low quality AI Cover</p>
+                                    <p>no additional images</p>
+                                    <p>no book editing</p>
                                 </div>
                                 <div className='down-part'>
                                 {book1 == 'plan-card selected' ? 
@@ -59,8 +63,9 @@ export function Step1() {
                                 <h2>Premium</h2>
                                 <h2 className='plan-price'><span>$</span>29</h2>
                                 <div className='info'>
-                                    <p>100 pages</p>
-                                    <p>low qualiity AI images</p>
+                                    <p>300 pages</p>
+                                    <p>high quality AI Cover</p>
+                                    <p>10 additional mid quality images</p>
                                     <p>no editing</p>
                                 </div>
                                 <div className='down-part'>
@@ -76,9 +81,10 @@ export function Step1() {
                                 <h2>Dostoevsky</h2>
                                 <h2 className='plan-price'><span>$</span>49</h2>
                                 <div className='info'>
-                                    <p>100 pages</p>
-                                    <p>low qualiity AI images</p>
-                                    <p>no editing</p>
+                                    <p>500 pages</p>
+                                    <p>highest quality AI Cover</p>
+                                    <p>20 additional high quality images</p>
+                                    <p>book editing</p>
                                 </div>
                                 <div className='down-part'>
                                 {book3 == 'plan-card selected' ? 

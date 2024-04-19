@@ -68,7 +68,7 @@ export function LogedPage() {
         <div className='create-first'>
             <h1>Create your first e-book</h1>
             <p>Get the fully written book in only a few minutes, with no effort.</p>
-            <button className='create-btn' onClick={() => navigate('/logedPage/step1') }>Create E-Book</button>
+            <button className='create-btn' onClick={() => navigate('/logedPage/step1', {state: {email: email}}) }>Create E-Book</button>
         </div>
     }
 </div>

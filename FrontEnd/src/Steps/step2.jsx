@@ -9,6 +9,8 @@ export function Step2(){
     const navigate = useNavigate();
     const location = useLocation();
     const plan = location.state.plan;
+    const email = location.state.email;
+    console.log(email)
 
     const [aiChecked, setAiChecked] = useState(true);
     const [customChecked, setCustomChecked] = useState(false);
@@ -54,12 +56,12 @@ const [chapterLengths, setChapterLengths] = useState(Array(chapterNum).fill(''))
     }, [plan]);
 
     const goBack = () => {
-        navigate('/logedPage/step1');
+        navigate('/logedPage/step1', {state: {email: email}});
     }
 
     const nextPage = () => {
         if(bookName !== '' && bookDesc !== '' && bookAuthor !== ''){
-            navigate('/logedPage/step3', {state: {plan: plan, bookName: bookName, bookDesc: bookDesc, bookAuthor: bookAuthor, bookLang: bookLang, page: page}});
+            navigate('/logedPage/step3', {state: {plan: plan, bookName: bookName, bookDesc: bookDesc, bookAuthor: bookAuthor, bookLang: bookLang, page: page,email: email}});
         }
     }
 
