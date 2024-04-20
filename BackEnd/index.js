@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 app.put('/signup', signup);
 app.post('/login', login);
 app.put('/verify', verify);
-app.post('/purchaseBook', purchaseBook);
+app.post('/api/purchaseBook', purchaseBook);
 
 
 app.listen(port, () => {

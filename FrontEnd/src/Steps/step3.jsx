@@ -24,7 +24,7 @@ export function Step3() {
 
     useEffect(() => {
         if(plan === 'Basic'){
-            setProductID("347098")
+            setProductID("347579")
         } else if(plan === 'Premium'){
             setProductID("347102")
         } else {
@@ -43,8 +43,8 @@ export function Step3() {
     const purchase = async (e) =>{
         e.preventDefault();
         try{
-            const response = await axios.post('http://localhost:3000/purchaseBook', {
-                storeID: productID,
+            const response = await axios.post('http://localhost:3000/api/purchaseBook', {
+                storeID: "347102",
                 email: email
             });
     

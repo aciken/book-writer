@@ -3,24 +3,24 @@ const {lemonSqueeztApiInstance} = require('../utils/axios');
 const dotenv = require('dotenv').config();
 
  const purchaseBook = async(req, res) => {
-    const { storeID, email } = req.body;
     try {
-
+      const reqData = req.body;
+      const email = req.body.email;
   
-        
+      console.log(reqData.storeID, email, process.env.LEMON_SQUEZZY_STORE_ID, process.env.LEMON_SQUEEZY_API_KEY)
 
-      if(!storeID) 
+      if(!reqData.storeID) 
         return res.status(400).json({message: "productId is required"});
   
         console.log('asd')
       const response = await lemonSqueeztApiInstance.post('/checkouts', {
         data: {
           type: "checkouts",
-          attributes:{
-            checkout_data: {
-                custom: {
-                    user_id: 123,
-                },
+          attributes: {
+            checkout_data:{
+              custom:{
+                user_id: email,
+              },
             },
           },
           relationships: {
@@ -33,7 +33,7 @@ const dotenv = require('dotenv').config();
             variant: {
               data: {
                 type: "variants",
-                id: storeID.toString(),
+                id: reqData.storeID.toString(),
               },
             },
           },
@@ -41,7 +41,10 @@ const dotenv = require('dotenv').config();
       });
   
       const checkoutUrl = response.data.data.attributes.url;
-  
+
+
+
+  console.log(checkoutUrl)
       console.log(response.data);
       console.log('yea')
   
