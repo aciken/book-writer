@@ -24,8 +24,9 @@ export function Step2(){
     const [showAdvanced, setShowAdvanced] = useState(false);
 
     const [chapterNum, setChapterNum] = useState(5);
-    const [chapterDescriptions, setChapterDescriptions] = useState(Array(chapterNum).fill(''));
-const [chapterLengths, setChapterLengths] = useState(Array(chapterNum).fill(''));
+    const [chapterDescriptions, setChapterDescriptions] = useState([]);
+const [chapterLengths, setChapterLengths] = useState([]);
+const [chapterNames, setChapterNames] = useState([]);
 
 
     const [tempChapterNum, setTempChapterNum] = useState(chapterNum);
@@ -61,7 +62,7 @@ const [chapterLengths, setChapterLengths] = useState(Array(chapterNum).fill(''))
 
     const nextPage = () => {
         if(bookName !== '' && bookDesc !== '' && bookAuthor !== ''){
-            navigate('/logedPage/step3', {state: {plan: plan, bookName: bookName, bookDesc: bookDesc, bookAuthor: bookAuthor, bookLang: bookLang, page: page,email: email}});
+            navigate('/logedPage/step3', {state: {plan: plan, bookName: bookName, bookDesc: bookDesc, bookAuthor: bookAuthor, bookLang: bookLang, page: page,email: email, chapterNum: chapterNum, chapterDescriptions: chapterDescriptions, chapterLengths: chapterLengths,chapterNames: chapterNames}});
         }
     }
 
@@ -73,7 +74,7 @@ const [chapterLengths, setChapterLengths] = useState(Array(chapterNum).fill(''))
         }
     }
 
-    const [chapterNames, setChapterNames] = useState([]);
+
 
     return(
         <div className='step2'>

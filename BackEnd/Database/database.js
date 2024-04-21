@@ -16,6 +16,10 @@ const UserSchema = new mongoose.Schema({
     verify:{
         type: Number,
         default: 0
+    },
+    books:{
+        type: Array,
+        default: []
     }
 
 });

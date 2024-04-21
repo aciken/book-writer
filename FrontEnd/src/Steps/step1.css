@@ -88,7 +88,7 @@
 
 .plan-card.selected{
     border: 3px solid #2563eb;
-
+    background-color: #60a5fa;
 }
 
 .plan-card h2{

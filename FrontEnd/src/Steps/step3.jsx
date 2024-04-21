@@ -19,18 +19,42 @@ export function Step3() {
     const bookAuthor = location.state.bookAuthor;
     const bookLang = location.state.bookLang;
     const page = location.state.page;
+    const chapterNum = location.state.chapterNum;
+    const chapterDescriptions = location.state.chapterDescriptions;
+    const chapterLengths = location.state.chapterLengths;
+    const chapterNames = location.state.chapterNames;
+
+
 
     const [productID, setProductID] = useState('');
+    const [bookNumber, setBookNumber] = useState('');
+
 
     useEffect(() => {
         if(plan === 'Basic'){
-            setProductID("347579")
+            setProductID("347098")
         } else if(plan === 'Premium'){
             setProductID("347102")
         } else {
             setProductID("347103")
         }
     }, [plan]);
+
+    const getBookNumber = async () => {
+  
+             await axios.post('http://localhost:3000/getBooks', {
+                email: email
+ 
+    })
+    .then(res =>{
+        console.log(res.data.books.length)
+        setBookNumber(res.data.books.length)
+    })
+}
+
+useEffect(() => {
+    getBookNumber();
+}, []); 
 
 
 
@@ -43,10 +67,22 @@ export function Step3() {
     const purchase = async (e) =>{
         e.preventDefault();
         try{
-            const response = await axios.post('http://localhost:3000/api/purchaseBook', {
-                storeID: "347102",
-                email: email
+            const response = await axios.post('http://localhost:3000/api/purchaseTry', {
+                productID: productID,
+                email: email,
+                number: bookNumber,
+                bookName: bookName
             });
+
+            axios.put('http://localhost:3000/createBook', {
+                email: email,
+                number: bookNumber,
+                bookName: bookName,
+            })
+            .then(res => {
+                console.log(res.data.message)
+                navigate('/logedPage', {state: {email: email}})
+            })
     
     
     
@@ -56,6 +92,28 @@ export function Step3() {
         
         }
       }
+
+      
+
+        const createBook = async (e) =>{
+            e.preventDefault();
+
+            console.log(page, bookDesc, bookName, bookAuthor, bookLang, chapterNum, chapterDescriptions, chapterLengths,chapterNames)
+            // try{
+            //     const response = await axios.post('http://localhost:3000/pdfCreate', {
+            //         pageLength: page,
+            //         description: bookDesc,
+            //         title: bookName,
+            //         author: bookAuthor
+            //     });
+        
+            //     console.log(response);
+            // }catch(error){
+            //     console.log(error);
+            
+            // }
+
+        }
 
 
     return (
@@ -75,7 +133,7 @@ export function Step3() {
                             <p>{bookLang}</p>
                             <p>{page}</p>
                         </div>
-                        <a href="#" className="next-btn able" onClick={(e) => purchase(e)} >Purchase</a>
+                        <a href="#" className="next-btn able" onClick={(e) => purchase(e)} >Create Book</a>
                     </div>
                     </div>
                     </div>

@@ -1,8 +1,9 @@
 import { useLocation,useNavigate } from 'react-router-dom';
 import './LogedPage.css';
 import { LogedNav } from './LogedNav';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import step1 from '../assets/step1.png';
+import axios from 'axios';
 
 
 export function LogedPage() {
@@ -13,6 +14,8 @@ export function LogedPage() {
 
     const [formOpen, setFormOpen] = useState(false);
     const [formPhase, setFormPhase] = useState(1);
+
+    const [books, setBooks] = useState('');
 
 
 
@@ -30,47 +33,58 @@ export function LogedPage() {
         setFormOpen(true);
     }
 
+    const getBookNumber = async () => {
+  
+        await axios.post('http://localhost:3000/getBooks', {
+           email: email
+
+})
+.then(res =>{
+   console.log(res.data.books)
+   setBooks(res.data.books)
+})
+}
+
+useEffect(() => {
+getBookNumber();
+}, []); 
+
 
 
     return (
 
 <div className="LogedPage">
     <LogedNav/>
-    {formOpen ? 
-        <div className='form-container'>
-            {formPhase == 1 ?
-                <div className='step-form'>
-                    <img className='process' src={step1} alt=""/>
-                    <div className='step-container'>
-                    <h1>Chose a Book Plan</h1>
-                
-                        <button className='create-btn' onClick={openForm}>Next</button>
+ 
+
+        {books.length > 0 ?
+        <div className='books-part'>
+            <div className='create-book' onClick={() => navigate('/logedPage/step1', {state: {email: email}}) }>
+                <p>Create Book</p>
+                <p className='plus'>+</p>
+            </div>
+
+            <div className="all-books">
+                {books.map((book, index) => (
+                    <div className='book-card' key={index}>
+                        <p className='book-name'>{book.bookName}</p>
+                        {book.bookStatus === 'unpaid' ? <p className='unpaid'>Unpaid</p> : <p className='paid'>Download</p>}
+
                     </div>
+                ))}
+            </div>
 
 
-                    </div>
-           
-                : formPhase == 2 ?
-                <div className='create-first'>
-                    <h1>Create your first e-book</h1>
-                    <p>Phase 2: Customize your book.</p>
-                    <button className='create-btn' onClick={openForm}>Customize E-Book</button>
-                </div> 
-                :
-                <div className='create-first'>
-                    <h1>Create your first e-book</h1>
-                    <p>Phase 3: Review and publish your book.</p>
-                    <button className='create-btn' onClick={openForm}>Review and Publish</button>
-                </div>
-            }
-        </div> 
+        </div>
         :
         <div className='create-first'>
             <h1>Create your first e-book</h1>
             <p>Get the fully written book in only a few minutes, with no effort.</p>
             <button className='create-btn' onClick={() => navigate('/logedPage/step1', {state: {email: email}}) }>Create E-Book</button>
         </div>
-    }
+        }
+
+    
 </div>
 
 
