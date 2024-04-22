@@ -105,6 +105,26 @@ const deleteBook = async (e,index) => {
     })
 }
 
+const unpaidClick = (index) => {
+    axios.post('http://localhost:3000/getBooks', {
+        email: email
+    })
+    .then(res => {
+        if(res.data.books[index].bookStatus === 'unpaid'){
+            purchase(index,email)
+        } else {
+            window.location.reload();
+        }
+
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
+
+
+}
+
 
 
     return (
@@ -207,7 +227,7 @@ const deleteBook = async (e,index) => {
                         }
                     }}>
                         <p className='book-name'>{book.bookName}</p>
-                        {book.bookStatus === 'unpaid' ? <p className='unpaid' onClick={() => purchase(index,email)}>Unpaid</p> : <p className='paid'>Download</p>}
+                        {book.bookStatus === 'unpaid' ? <p className='unpaid' onClick={() => unpaidClick(index)}>Unpaid</p> : <p className='paid'>Download</p>}
                     </div>
                 ))}
             </div>
