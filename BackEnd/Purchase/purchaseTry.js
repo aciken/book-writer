@@ -8,6 +8,8 @@ const purchaseTry = async(req,res) =>{
     try {
         const reqData = await req.body;
 
+        
+
 
 
         if(!reqData.productID) return res.status(400).json({message: 'productId is required'});
@@ -21,6 +23,10 @@ const purchaseTry = async(req,res) =>{
                     custom: {
                       user_id: reqData.email,
                       number: reqData.number.toString(),
+                      bookName: reqData.bookName,
+                      pageLength: reqData.pageLength.toString(),
+                      description: reqData.description,
+                      author: reqData.author
                     }
                   }
                 },

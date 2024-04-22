@@ -71,13 +71,25 @@ useEffect(() => {
                 productID: productID,
                 email: email,
                 number: bookNumber,
-                bookName: bookName
+                bookName: bookName,
+                pageLength: page,
+                description: bookDesc,
+                author: bookAuthor
             });
 
             axios.put('http://localhost:3000/createBook', {
                 email: email,
-                number: bookNumber,
                 bookName: bookName,
+                plan: plan,
+                number: bookNumber,
+                bookDesc: bookDesc,
+                bookAuthor: bookAuthor,
+                bookLang: bookLang,
+                page: page,
+                chapterNum: chapterNum,
+                chapterDescriptions: chapterDescriptions,
+                chapterLengths: chapterLengths,
+                chapterNames: chapterNames
             })
             .then(res => {
                 console.log(res.data.message)

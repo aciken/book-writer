@@ -9,15 +9,16 @@ const pdfCreate = async (req,res) => {
 
     let text;
     async function main1() {
-
+        const maxTokens = pageLength * 500; // Adjust this value as needed
+    
         const completion = await openai.chat.completions.create({
             messages: [
-                {"role": "system", "content": "You are a book writer that is writing a book using a description of what that book is about"},
-                {"role": "user", "content": "Write a short book that is" + pageLength + "long using this description:" + description + ".This book should conain" + pageLength*500 + "words. The title of the book is" + title + "and the author is" + author},
+                {"role": "system", "content": "You are a talented author who excels at creating engaging, story-like content. Your task is to write a book based on a given description."},
+                {"role": "user", "content": `Please write a book titled "${title}" by ${author}. The book should be about ${description}. It should be structured as a story and be approximately ${maxTokens} words long, spread across ${pageLength} full pages with at least 300 words per page. Please ensure the content is engaging, with a clear beginning, middle, and end.`},
             ],
             model: "gpt-3.5-turbo",
         });
-
+    
         text = completion.choices[0].message.content;
     }
 

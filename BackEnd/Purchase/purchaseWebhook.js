@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const User = require('../Database/database');
+const pdfCreate = require('../PDF/pdfCreate');
 
 const purchaseWebhook = async (req, res) => {
     try {
@@ -29,14 +30,18 @@ const purchaseWebhook = async (req, res) => {
     
         console.log(body);
     
+
+
         if(eventType === "order_created"){
           const userId = body.meta.custom_data.user_id;
           const isSuccesful = body.data.attributes.status === "paid";
-        }
+      }
 
 
         const userID = body.meta.custom_data.user_id;
         const number = parseInt(body.meta.custom_data.number, 10);
+
+
         
         const user = await User.findOne({ email: userID });
         console.log(userID, number, user)
@@ -48,6 +53,30 @@ const purchaseWebhook = async (req, res) => {
                 await user.save();
             }
         }
+
+
+        const bookName = body.meta.custom_data.bookName;
+        const pageLength = body.meta.custom_data.pageLength;
+        const description = body.meta.custom_data.description;
+        const author = body.meta.custom_data.author;
+
+    
+        // Call pdfCreate
+        const pdfCreateReq = {
+          body: {
+              pageLength: pageLength,
+              description: description,
+              title: bookName,
+              author: author,
+          }
+      };
+      const pdfCreateRes = {
+          status: (statusCode) => ({
+              send: (message) => console.log(message),
+              json: (message) => console.log(message)
+          })
+      };
+      pdfCreate(pdfCreateReq, pdfCreateRes);
     
     
         return res.status(200).json({message: "Webhook received successfully"});

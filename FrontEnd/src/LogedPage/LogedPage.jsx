@@ -17,6 +17,11 @@ export function LogedPage() {
 
     const [books, setBooks] = useState('');
 
+    const [popup, setPopup] = useState(false);
+    const [clickedIndex, setClickedIndex] = useState(0);
+
+    const [removePopup, setRemovePopup] = useState(false);
+
 
 
 
@@ -49,6 +54,57 @@ useEffect(() => {
 getBookNumber();
 }, []); 
 
+const purchase = async (index,email) => {
+    let bookPlan;
+
+    if(books[index].plan === 'Basic'){
+        bookPlan = '347098'
+    } else if(books[index].plan === 'Premium'){
+        bookPlan = '347102'
+    }
+    else {
+        bookPlan = '347103'
+    }
+
+    try {
+
+        console.log(email, index, bookPlan)
+        const response = await axios.post('http://localhost:3000/api/purchaseTry', {
+            email: email,
+            number: index,
+            productID: bookPlan,
+            pageLength: books[index].page,
+            description: books[index].bookDesc,
+            author: books[index].bookAuthor,
+     }) 
+
+     window.open(response.data.checkoutUrl, '_blank')
+    } catch (error) {
+        console.log(error);
+    }
+
+
+}
+
+const deleteBook = async (e,index) => {
+    e.preventDefault();
+
+ 
+       await axios.put('http://localhost:3000/deleteBook', {
+            email: email,
+            number: index
+ 
+
+    })
+    .then(res => {
+        window.location.reload();
+    
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
 
 
     return (
@@ -56,6 +112,84 @@ getBookNumber();
 <div className="LogedPage">
     <LogedNav/>
  
+        {removePopup ? 
+        <div className="remove-popup" onClick={() => setRemovePopup(false)}>
+        <div className="remove-popup-inner" onClick={(e) => e.stopPropagation()}>
+            <a href="#" className='close-popup' onClick={(e) => {e.preventDefault(); setRemovePopup(false)}}>x</a>
+            <div className='remove-popup-text'>
+                <div className='icon'>
+                    <h2>!</h2>
+                </div>
+                <div className='just-text'>
+                    <h3>Delete Book</h3>
+                    <p>Are you sure you want to delete this book. You won't be able to access this book. This action is irrevirsable.</p>
+                </div>
+            </div>
+                <div className='btns'>
+                <a href="#" className='cancle' onClick={(e) => {e.preventDefault(); setRemovePopup(false)}}>Cancle</a>
+                <a href="#" className='delete' onClick={(e) => {deleteBook(e, clickedIndex); setRemovePopup(false)}}>Delete</a>
+                </div>
+
+        </div>
+    </div>
+    :
+    null          
+        
+    }
+
+    {popup ?
+ <div className="popup" onClick={() => setPopup(false)}>
+        <div className="popup-inner" onClick={(e) => e.stopPropagation()}>
+            <a href="#" className='close-popup' onClick={(e) => {e.preventDefault(); setPopup(false)}}>x</a>
+            <div className='book-flex'>
+                <div className="book-flex-wrapper">
+                    <div className='left-flex'>
+                        <h1>Book Info</h1>
+                        <p>Here is all info about your book</p>
+                    </div>
+                    <div className='right-flex'>
+                        <div>
+                            <label htmlFor="book-name">Book Name</label>
+                            <input type="text" id='book-name' value={books[clickedIndex].bookName} disabled/>
+                        </div>
+                        <div>
+                            <label htmlFor="book-author">Book Author</label>
+                            <input type="text" id='book-author' value={books[clickedIndex].bookAuthor} disabled/>
+                            </div>
+                        <div>
+                            <label htmlFor="book-lang">Book Language</label>
+                            <input type="text" id='book-lang' value={books[clickedIndex].bookLang} disabled/>
+                            </div>
+                        <div>
+                            <label htmlFor="book-page">Book Page</label>
+                            <input type="text" id='book-page' value={books[clickedIndex].page} disabled/>
+                            </div>
+                        <div>
+                            <label htmlFor="book-plan">Book Plan</label>
+                            <input type="text" id='book-plan' value={books[clickedIndex].plan} disabled/>
+                            </div>
+                        <div>
+                            <label htmlFor="book-desc">Book Description</label>
+                            <textarea id='book-desc' value={books[clickedIndex].bookDesc} disabled/>
+                            </div>
+                            
+
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div className='down-bar'>
+                {books[clickedIndex].bookStatus === 'unpaid' ? <a href='#' className='purchase-btn' onClick={(e) => {purchase(clickedIndex,email); e.preventDefault()}}>Purchase</a> : <a href='#' onClick={(e) => e.preventDefault()} className='download-btn'>Download</a>
+                }
+                <a href="#" className='delete-btn' onClick={(e) => {e.preventDefault(); setRemovePopup(true)}}>Delete</a>
+            </div>
+            
+        </div>
+    </div>
+    : null
+}
 
         {books.length > 0 ?
         <div className='books-part'>
@@ -66,10 +200,14 @@ getBookNumber();
 
             <div className="all-books">
                 {books.map((book, index) => (
-                    <div className='book-card' key={index}>
+                    <div className='book-card' key={index} onClick={(e) => {
+                        if (!['unpaid', 'paid'].includes(e.target.className)) {
+                            setClickedIndex(index);
+                            setPopup(true);
+                        }
+                    }}>
                         <p className='book-name'>{book.bookName}</p>
-                        {book.bookStatus === 'unpaid' ? <p className='unpaid'>Unpaid</p> : <p className='paid'>Download</p>}
-
+                        {book.bookStatus === 'unpaid' ? <p className='unpaid' onClick={() => purchase(index,email)}>Unpaid</p> : <p className='paid'>Download</p>}
                     </div>
                 ))}
             </div>

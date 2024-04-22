@@ -14,6 +14,7 @@ const purchaseTry = require('./Purchase/purchaseTry');
 const purchaseWebhook = require('./Purchase/purchaseWebhook');
 const getBooks = require('./Books/getBooks');
 const createBook = require('./Books/createBook');
+const deleteBook = require('./Books/deleteBook');
 
 
 app.get('/', (req, res) => {
@@ -28,7 +29,7 @@ app.post('/pdfCreate', pdfCreate);
 app.post('/api/purchaseTry', purchaseTry);
 app.post('/api/purchaseWebhook', purchaseWebhook);
 app.put('/createBook', createBook);
-
+app.put('/deleteBook', deleteBook);
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
